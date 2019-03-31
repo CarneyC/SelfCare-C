@@ -14,11 +14,14 @@ import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
+import { default as userSelector, isAuthenticated } from "../selectors/authSelectors";
+
 library.add(fab)
 
 class App extends Component {
   render() {
     const {isAuthenticated, user} = this.props
+      console.log(user)
 
     const guestViews = (
       <div id="landing-page" className="wrapper">
@@ -54,8 +57,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
-    user: state.auth.currentUser
+    isAuthenticated: isAuthenticated(state),
+    user: userSelector(state)
   }
 }
 

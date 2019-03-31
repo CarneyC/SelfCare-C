@@ -9,13 +9,11 @@ class ProvidersForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
       name: "",
       address: "",
       phone: "",
       first_visit: "",
       notes: "",
-      checked: true
     }
   }
 
@@ -34,7 +32,7 @@ class ProvidersForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    if (this.state.id === "") {
+    if (this.state.id === undefined) {
       this.props.createProvider(this.state)
     } else {
       this.props.updateProvider(this.state.id, this.state)
@@ -65,7 +63,7 @@ class ProvidersForm extends Component {
         <TextFieldGroup
           label="Phone:"
           id="formControlsPhone"
-          type="text"
+          type="tel"
           name="phone"
           placeholder="phone"
           value={this.state.phone}
@@ -74,7 +72,7 @@ class ProvidersForm extends Component {
         <TextFieldGroup
           label="First Visit:"
           id="formControlsFirstVisit"
-          type="text"
+          type="date"
           name="first_visit"
           placeholder="first_visit"
           value={this.state.first_visit}

@@ -104,8 +104,8 @@ export const deleteMedication = medicationId => {
         'Content-Type': 'application/json'
       }
     })
-      .then(medication => {
-        dispatch(destroyMedication(medication))
+      .then(() => {
+        dispatch(destroyMedication(medicationId))
       })
       .catch(error => console.log(error))
   };

@@ -8,7 +8,6 @@ class MedicationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
       name: "",
       dose: "",
       first_dose: "",
@@ -32,7 +31,7 @@ class MedicationForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    if (this.state.id === "") {
+    if (this.state.id === undefined) {
       this.props.createMedication(this.state)
     } else {
       this.props.updateMedication(this.state.id, this.state)
@@ -63,7 +62,7 @@ class MedicationForm extends Component {
         <TextFieldGroup
           label="Date of First Dose:"
           id="formControlsFirstDose"
-          type="text"
+          type="date"
           name="first_dose"
           placeholder="First Dose"
           value={this.state.first_dose}

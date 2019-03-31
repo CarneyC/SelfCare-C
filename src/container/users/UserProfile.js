@@ -8,6 +8,8 @@ import UserMeds from './UserMeds'
 import UserInsurance from './UserInsurance'
 import UserProviders from './UserProviders'
 
+import { providersSelector, medicationsSelector, insurancesSelector } from '../../selectors';
+
 class UserProfile extends Component {
   constructor(props){
     super(props);
@@ -149,10 +151,9 @@ class UserProfile extends Component {
 
 const mapStatesToProps = (state) => {
   return ({
-    users: state.users,
-    medications: state.medications,
-    insurances: state.insurances,
-    providers: state.providers,
+    medications: medicationsSelector(state),
+    insurances: insurancesSelector(state),
+    providers: providersSelector(state),
     medication: state.medication,
     insurance: state.insurance,
     provider: state.provider

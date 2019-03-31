@@ -32,7 +32,7 @@ class Navigation extends Component {
         <li><Link to="/health_resources">Health Resources</Link></li>
         <li><Link to="/entries">Entries</Link></li>
         <li><Link to="/user_profile">Profile</Link></li>
-        <li onClick={(e) => this.handleLogout(e)}>Log Out</li>
+        <li onClick={(e) => this.handleLogout(e)} style={{cursor:'pointer'}}>Log Out</li>
       </ul>
     );
 

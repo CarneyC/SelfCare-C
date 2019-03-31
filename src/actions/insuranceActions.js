@@ -103,8 +103,8 @@ export const deleteInsurance = insuranceId => {
         'Content-Type': 'application/json'
       }
     })
-      .then(insurance => {
-        dispatch(destroyInsurance(insurance))
+      .then(() => {
+        dispatch(destroyInsurance(insuranceId))
       })
       .catch(error => console.log(error))
   };

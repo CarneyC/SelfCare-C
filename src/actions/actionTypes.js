@@ -7,6 +7,8 @@ export const LOGOUT = "LOGOUT"
 export const RESET_FORM = "RESET_FORM"
 
 //Users Attributes
+export const ADD_USER = "ADD_USER";
+
 export const REQUEST_MEDICATIONS = "REQUEST_MEDICATIONS"
 export const ADD_MEDICATION = "ADD_MEDICATION"
 export const UPDATE_MEDICATION = "UPDATE_MEDICATION"

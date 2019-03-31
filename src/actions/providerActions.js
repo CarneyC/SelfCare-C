@@ -77,7 +77,7 @@ export const createProvider = provider => {
 export const updateProvider = (providerId, provider) => {
   return (dispatch) => {
     return fetch(`${providerLink}/${providerId}`, {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Authorization": `Bearer ${localStorage.token}`,
         'Content-Type': 'application/json'
@@ -103,8 +103,8 @@ export const deleteProvider = providerId => {
         'Content-Type': 'application/json'
       }
     })
-      .then(provider => {
-        dispatch(destroyProvider(provider))
+      .then(() => {
+        dispatch(destroyProvider(providerId))
       })
       .catch(error => console.log(error))
   };

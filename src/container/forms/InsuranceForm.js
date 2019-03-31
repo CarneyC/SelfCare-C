@@ -8,7 +8,6 @@ class InsuranceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
       name: "",
       address: "",
       phone: "",
@@ -31,7 +30,7 @@ class InsuranceForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    if (this.state.id === "") {
+    if (this.state.id === undefined) {
       this.props.createInsurance(this.state)
     } else {
       this.props.updateInsurance(this.state.id, this.state)

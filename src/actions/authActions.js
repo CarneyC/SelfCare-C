@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import { API_URL } from './apiUrl'
 import * as types from './actionTypes'
+import normalize from "../utils/normalize";
 
 const authRequest = () => {
   return {
@@ -20,6 +21,13 @@ const authFailure = (errors) => {
   return {
     type: types.AUTHENTICATION_FAILURE,
     errors: errors
+  }
+}
+
+const addUser = (user) => {
+  return {
+    type: types.ADD_USER,
+    user: user
   }
 }
 
@@ -73,9 +81,14 @@ export const authenticate = (credentials) => {
           localStorage.setItem('token', token);
           return getUser(credentials)
       })
+      .then((originalData) => {
+          const { result, entities } = normalize(originalData);
+          const user = entities.users[result];
+          dispatch(addUser(user, localStorage.token))
+          return user;
+      })
       .then((user) => {
-        console.log(user)
-          dispatch(authSuccess(user, localStorage.token))
+          dispatch(authSuccess(user.id, localStorage.token))
       })
       .catch((errors) => {
           dispatch(authFailure(errors))
