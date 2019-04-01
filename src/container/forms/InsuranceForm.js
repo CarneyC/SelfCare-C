@@ -29,9 +29,9 @@ class InsuranceForm extends Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (this.state.id === undefined) {
-      this.props.createInsurance(this.state)
+      this.props.createInsurance(this.state);
     } else {
       this.props.updateInsurance(this.state.id, this.state)
     }

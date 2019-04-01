@@ -21,7 +21,6 @@ library.add(fab)
 class App extends Component {
   render() {
     const {isAuthenticated, user} = this.props
-      console.log(user)
 
     const guestViews = (
       <div id="landing-page" className="wrapper">
@@ -41,6 +40,7 @@ class App extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/about" component={About} />
         <Route exact path="/health_resources" component={HealthResources} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/entries" component={UserEntries} />
         <Route exact path="/user_profile" render={() => <UserProfile user={user}/>} />
         <Footer/>

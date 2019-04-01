@@ -1,5 +1,7 @@
 import { API_URL } from './apiUrl'
-import * as types from './actionTypes'
+import types from './actionTypes'
+
+import { normalizeBehaviors as normalize } from "../utils/normalize";
 
 // Action Creators
 const setBehaviors = behaviors => {
@@ -7,14 +9,14 @@ const setBehaviors = behaviors => {
     type: types.REQUEST_BEHAVIORS,
     behaviors
   }
-}
+};
 
-// const addBehavior = behavior => {
-//   return {
-//     type: types.CREATE_BEHAVIOR,
-//     behavior
-//   }
-// }
+const setConditions = conditions => {
+    return {
+        type: types.REQUEST_CONDITIONS,
+        conditions
+    }
+};
 
 export const getBehaviors = () => {
   return (dispatch) => {
@@ -24,28 +26,16 @@ export const getBehaviors = () => {
       },
     })
       .then(response => response.json())
-      .then(behaviors => {
-        dispatch(setBehaviors(behaviors))
+      .then(originalData => {
+        const data = {
+            id: 0, behaviors: originalData
+        };
+        const { behaviors, conditions } = normalize(data).entities;
+        // console.log(behaviors)
+        dispatch(setConditions(Object.values(conditions)));
+        dispatch(setBehaviors(Object.values(behaviors)));
       })
       .catch(error => console.log(error));
   };
-}
+};
 
-// export const createBehavior = behavior => {
-//   return dispatch => {
-//     return fetch(`${API_URL}/behaviors`, {
-//       method: "POST",
-//       headers: {
-//         "Authorization": `Bearer ${localStorage.token}`,
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({behavior: behavior})
-//     })
-//       .then(response => response.json())
-//       .then(behavior => {
-//         dispatch(addBehavior(behavior))
-//         dispatch(resetBehaviorForm())
-//       })
-//       .catch(error => console.log(error))
-//   };
-// }

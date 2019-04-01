@@ -1,5 +1,5 @@
 import { many, attr, Model } from 'redux-orm';
-import * as types from '../actions/actionTypes';
+import types from '../actions/actionTypes';
 
 class User extends Model {
     static reducer(action, User, session) {
@@ -20,7 +20,7 @@ User.fields = {
     id: attr(),
     name: attr(),
     email: attr(),
-    medications: many({ to: 'Medication', relatedName: 'user' }),
+    medications: many({ to: 'Condition', relatedName: 'user' }),
     insurances: many({ to: 'Insurance', relatedName: 'user' }),
     providers: many({ to: 'Provider', relatedName: 'user' }),
 };

@@ -1,5 +1,5 @@
 import { API_URL } from './apiUrl'
-import * as types from './actionTypes'
+import types from './actionTypes'
 
 const providerLink = `${API_URL}/providers`
 
@@ -67,8 +67,10 @@ export const createProvider = provider => {
     })
       .then(response => response.json())
       .then(provider => {
-        dispatch(addProvider(provider))
-        dispatch(resetProviderForm())
+        if (provider.id !== undefined) {
+          dispatch(addProvider(provider))
+          dispatch(resetProviderForm())
+        }
       })
       .catch(error => console.log(error))
   };

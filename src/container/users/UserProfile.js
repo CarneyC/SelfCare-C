@@ -88,16 +88,10 @@ class UserProfile extends Component {
   }
 
   render() {
-    console.log(this.props);
     return(
       <div className="container">
         <Grid>
           <Col md={4}>
-            <div className="ProfileImage">
-              <Image src="/thumbnail.png" thumbnail />
-              <Button bsStyle="link">Add Image</Button> | <Button bsStyle="link">Change Image</Button>
-              <p>Add an image that gives you joy</p>
-            </div>
           </Col>
           <Col md={8}>
             <h1>{this.props.user.name}</h1>
@@ -154,9 +148,6 @@ const mapStatesToProps = (state) => {
     medications: medicationsSelector(state),
     insurances: insurancesSelector(state),
     providers: providersSelector(state),
-    medication: state.medication,
-    insurance: state.insurance,
-    provider: state.provider
   });
 };
 

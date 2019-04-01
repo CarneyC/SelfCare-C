@@ -1,4 +1,4 @@
 import ormSelector from '../utils/composeOrmSelector';
 
-export default ormSelector('Medication');
+export default ormSelector('Condition', true);
 

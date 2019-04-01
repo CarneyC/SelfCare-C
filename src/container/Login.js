@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Button, Col, Grid } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { authenticate } from '../actions/authActions';
 import TextFieldGroup from '../components/common/formFields';
+
+import { isAuthenticated, authFailure } from '../selectors/authSelectors';
 
 class Login extends Component {
   constructor(props){
@@ -22,16 +24,14 @@ class Login extends Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    if (this.props.authenticate(this.state)) {
-      this.props.history.push('/user_profile')
-      window.alert("You're Logged In!")
-    } else {
-      window.alert("Sorry, something went wrong. Please try logging in again.")
-    }
+      e.preventDefault();
+      this.props.authenticate(this.state).then();
   }
 
   render() {
+    if (this.props.isAuthenticated)
+        return <Redirect to="/user_profile" />;
+
     return (
       <main>
         <Form onSubmit={this.handleSubmit}>
@@ -53,9 +53,9 @@ class Login extends Component {
             placeholder="Password"
             value={this.state.password}
             onChange={this.handleChange}
+            error={this.props.authFailure ? "Incorrect email / password." : null}
           />
          <div className="submissionFields">
-            <Button bsStyle="link">Forgot Password?</Button>
             <Button type="submit" value="Login" bsStyle="primary">Log In</Button>
          </div>
          <div className="alternativeAccess">
@@ -67,4 +67,11 @@ class Login extends Component {
   }
 }
 
-export default Login = withRouter(connect(null, {authenticate})(Login));
+const mapStatesToProps = (state) => {
+  return ({
+    isAuthenticated: isAuthenticated(state),
+    authFailure: authFailure(state)
+  });
+};
+
+export default Login = withRouter(connect(mapStatesToProps, {authenticate})(Login));

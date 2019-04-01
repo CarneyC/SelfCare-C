@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import { API_URL } from './apiUrl'
-import * as types from './actionTypes'
-import normalize from "../utils/normalize";
+import types from './actionTypes'
+import { normalizeAuth as normalize } from "../utils/normalize";
+
 
 const authRequest = () => {
   return {

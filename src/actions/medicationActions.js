@@ -1,5 +1,5 @@
 import { API_URL } from './apiUrl'
-import * as types from './actionTypes'
+import types from './actionTypes'
 
 const medicationLink = `${API_URL}/medications`
 
@@ -14,6 +14,13 @@ const setMedications = medications => {
 const addMedication = medication => {
   return {
     type: types.ADD_MEDICATION,
+    medication
+  }
+}
+
+const addSuccess = medication => {
+  return {
+    type: types.ADD_MEDICATION_SUCCESS,
     medication
   }
 }
@@ -68,8 +75,10 @@ export const createMedication = medication => {
     })
       .then(response => response.json())
       .then(medication => {
-        dispatch(addMedication(medication))
-        dispatch(resetMedicationForm())
+        if (medication.id !== undefined) {
+          dispatch(addMedication(medication))
+          dispatch(resetMedicationForm())
+        }
       })
       .catch(error => console.log(error))
   };

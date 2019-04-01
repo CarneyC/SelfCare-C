@@ -17,8 +17,16 @@ export const isAuthenticated = createSelector(
     ormSelector,
     auth,
     (session, auth) => {
-        if (auth)
-            return auth.isAuthenticated;
+        return auth ? auth.isAuthenticated : false;
+    }
+);
+
+export const authFailure = createSelector(
+    orm,
+    ormSelector,
+    auth,
+    (session, auth) => {
+        return auth ? auth.error : false;
     }
 );
 

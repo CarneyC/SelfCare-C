@@ -1,5 +1,5 @@
 import { attr, fk, Model } from 'redux-orm';
-import composeReducer from '../utils/composeReducer'
+import composeReducer from '../utils/composeOrmReducer'
 
 class Medication extends Model {
     static reducer = composeReducer('medication');

@@ -1,13 +1,4 @@
-import { createSelector } from 'redux-orm';
-import { orm } from '../models';
+import ormSelector from '../utils/composeOrmSelector';
 
-const ormSelector = state => state.orm;
-
-export default createSelector(
-    orm,
-    ormSelector,
-    (session) => {
-        return session.Provider.all().toRefArray();
-    }
-);
+export default ormSelector('Provider');
 

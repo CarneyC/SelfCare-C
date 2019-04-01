@@ -1,5 +1,5 @@
 import { API_URL } from './apiUrl'
-import * as types from './actionTypes'
+import types from './actionTypes'
 
 // Action Creators
 const setConditions = conditions => {
@@ -9,7 +9,7 @@ const setConditions = conditions => {
   }
 }
 
-const addCondition = condition => {
+export const addCondition = condition => {
   return {
     type: types.CREATE_CONDITION,
     condition

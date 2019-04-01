@@ -1,5 +1,5 @@
 import { API_URL } from './apiUrl'
-import * as types from './actionTypes'
+import types from './actionTypes'
 
 const insuranceLink = `${API_URL}/insurances`
 
@@ -67,8 +67,10 @@ export const createInsurance = insurance => {
     })
       .then(response => response.json())
       .then(insurance => {
-        dispatch(addInsurance(insurance))
-        dispatch(resetInsuranceForm())
+        if (insurance.id !== undefined) {
+          dispatch(addInsurance(insurance))
+          dispatch(resetInsuranceForm())
+        }
       })
       .catch(error => console.log(error))
   };

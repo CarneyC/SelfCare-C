@@ -24,12 +24,8 @@ class Signup extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.props.signup(this.state)) {
+    if (this.props.signup(this.state))
       this.props.history.push('/user_profile')
-      window.alert("Thank you for signing up.")
-    } else {
-      window.alert("We're having issues creating your account.")
-    }
   }
 
   render() {
@@ -65,7 +61,6 @@ class Signup extends Component {
             onChange={this.handleChange}
            />
          <div className="submissionFields">
-           <Button bsStyle="link">Forgot Password?</Button>
            <Button type="submit" value="Sign Up" bsStyle="primary">Sign Up</Button>
          </div>
          <div className="alternativeAccess">
