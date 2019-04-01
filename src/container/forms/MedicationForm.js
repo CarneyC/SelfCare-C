@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import TextFieldGroup from '../../components/common/formFields';
 import { connect } from 'react-redux';
-import { createMedication, updateMedication } from '../../actions/medicationActions'
+import { createMedication, updateMedication } from '../../redux/modules/medication/actions'
+import { medicationError } from "../../redux/modules/error/selectors";
 
 class MedicationForm extends Component {
   constructor(props) {
@@ -85,6 +86,7 @@ class MedicationForm extends Component {
            placeholder="notes"
            value={this.state.notes}
            onChange={this.handleChange}
+           error={this.props.medicationError}
           />
        <br />
          <Button bsStyle="success" type="submit" value="Add Medication">Add Medication</Button>
@@ -92,6 +94,12 @@ class MedicationForm extends Component {
     )
   }
 }
+
+const mapStatesToProps = (state) => {
+    return ({
+        medicationError: medicationError(state),
+    });
+};
 
 export default connect(null, {
   createMedication,

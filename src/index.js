@@ -5,7 +5,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from './reducers/index';
+import rootReducer from './redux/reducers';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 

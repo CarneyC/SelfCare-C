@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import TextFieldGroup from '../../components/common/formFields';
 import { connect } from 'react-redux';
-import { createInsurance, updateInsurance } from '../../actions/insuranceActions'
+import { createInsurance, updateInsurance } from '../../redux/modules/insurance/actions'
+import { insuranceError } from "../../redux/modules/error/selectors";
 
 class InsuranceForm extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class InsuranceForm extends Component {
   }
 
   render() {
+      console.log(this.props.insuranceError);
     return (
       <Form onSubmit={this.handleSubmit} data-id={this.state.id}>
         <TextFieldGroup
@@ -75,6 +77,7 @@ class InsuranceForm extends Component {
            placeholder="notes"
            value={this.state.notes}
            onChange={this.handleChange}
+           error={this.props.insuranceError}
           />
         <br />
          <Button bsStyle="success" type="submit" value="Add Insurance">Add Insurance</Button>
@@ -83,7 +86,14 @@ class InsuranceForm extends Component {
   }
 }
 
-export default connect(null, {
+
+const mapStatesToProps = (state) => {
+    return ({
+        insuranceError: insuranceError(state),
+    });
+};
+
+export default connect(mapStatesToProps, {
   createInsurance,
   updateInsurance
 })(InsuranceForm);

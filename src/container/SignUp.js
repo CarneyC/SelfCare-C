@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { signup } from '../actions/authActions';
+import { signup } from '../redux/modules/auth/actions';
 import TextFieldGroup from '../components/common/formFields';
 
 class Signup extends Component {

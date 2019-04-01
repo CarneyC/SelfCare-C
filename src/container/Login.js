@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Form, Button, Col, Grid } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import { authenticate } from '../actions/authActions';
+import { authenticate } from '../redux/modules/auth/actions';
 import TextFieldGroup from '../components/common/formFields';
 
-import { isAuthenticated, authFailure } from '../selectors/authSelectors';
+import { isAuthenticated } from '../redux/modules/auth/selectors';
+import { authFailure } from "../redux/modules/error/selectors";
 
 class Login extends Component {
   constructor(props){

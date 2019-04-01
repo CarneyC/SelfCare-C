@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {Image, Grid, Col, Button} from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { getMedications, deleteMedication } from '../../actions/medicationActions';
-import { getInsurances, deleteInsurance } from '../../actions/insuranceActions';
-import { getProviders, deleteProvider } from '../../actions/providerActions';
+import { getMedications, deleteMedication } from '../../redux/modules/medication/actions';
+import { getInsurances, deleteInsurance } from '../../redux/modules/insurance/actions';
+import { getProviders, deleteProvider } from '../../redux/modules/provider/actions';
 import UserMeds from './UserMeds'
 import UserInsurance from './UserInsurance'
 import UserProviders from './UserProviders'
 
-import { providersSelector, medicationsSelector, insurancesSelector } from '../../selectors';
+import { providersSelector, medicationsSelector, insurancesSelector } from '../../redux/selectors';
 
 class UserProfile extends Component {
   constructor(props){

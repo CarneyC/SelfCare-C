@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { updateLikes } from '../../actions/medicationActions'
+import { updateLikes } from '../../redux/modules/medication/actions'
 
 class MedicationListItem extends Component {
 

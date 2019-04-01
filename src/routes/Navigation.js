@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Link, withRouter } from "react-router-dom";
-import { logout } from '../actions/authActions';
+import { logout } from '../redux/modules/auth/actions';
 
 class Navigation extends Component {
   handleLogout = (e) => {

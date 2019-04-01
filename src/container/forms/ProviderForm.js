@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import TextFieldGroup from '../../components/common/formFields';
 import { connect } from 'react-redux';
-import { createProvider, updateProvider } from '../../actions/providerActions'
+import { createProvider, updateProvider } from '../../redux/modules/provider/actions'
 // import Departments from '../users/Departments'
+import { providerError } from "../../redux/modules/error/selectors";
 
 class ProvidersForm extends Component {
   constructor(props) {
@@ -86,6 +87,7 @@ class ProvidersForm extends Component {
            placeholder="notes"
            value={this.state.notes}
            onChange={this.handleChange}
+           error={this.props.providerError}
         />
 
        <br />
@@ -97,7 +99,7 @@ class ProvidersForm extends Component {
 
 const mapStateToProps = (state) => {
   return ({
-    departments: state.departments,
+      providerError: providerError(state)
   });
 }
 

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getBehaviors } from '../actions/behaviorActions'
+import { getBehaviors } from '../redux/modules/behavior/actions'
 import Behaviors from '../components/users/Behaviors';
 
-import behaviorsSelector from '../selectors/behaviorSelectors';
-import conditionsSelector from '../selectors/conditionSelectors';
+import behaviorsSelector from '../redux/modules/behavior/selectors';
+import conditionsSelector from '../redux/modules/condition/selectors';
 
 class About extends Component  {
   componentDidMount() {
