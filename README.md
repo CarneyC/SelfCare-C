@@ -22,6 +22,7 @@ Once you have Ruby 2.5.1 and Rails >= 5.1.4 installed,
 * rails db:seed
 * rails server -p 3001
 
+a postgre server with user selfcare should be present, the password canbe set in the .env file in the api directory.
 
 * cd client from your local directory
 * npm install
