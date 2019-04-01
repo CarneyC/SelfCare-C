@@ -1,4 +1,4 @@
-import { oneToOne, attr, Model } from 'redux-orm';
+import { attr, Model } from 'redux-orm';
 
 import { default as authTypes } from '../auth/types';
 import { default as medicationTypes } from '../medication/types';
@@ -80,7 +80,7 @@ Error.fields = {
     id: attr(),
     auth_error: attr(),
     medication_error: attr(),
-    insurance_error: oneToOne('User'),
+    insurance_error: attr(),
     provider_error: attr(),
 };
 

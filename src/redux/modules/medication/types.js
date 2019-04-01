@@ -1,3 +1,3 @@
-import composeTypes from '../../utils/createTypes';
+import createOrmTypes from '../../utils/createOrmTypes';
 
-export default composeTypes('medication');
+export default createOrmTypes('medication');

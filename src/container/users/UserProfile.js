@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { getMedications, deleteMedication } from '../../redux/modules/medication/actions';
 import { getInsurances, deleteInsurance } from '../../redux/modules/insurance/actions';
 import { getProviders, deleteProvider } from '../../redux/modules/provider/actions';
+import { addMed, editMed, addIns, editIns, addProv, editProv } from "../../redux/modules/form/actions";
+import { addingMed, editingMed, addingIns, editingIns, addingProv, editingProv } from "../../redux/modules/form/selectors";
+
 import UserMeds from './UserMeds'
 import UserInsurance from './UserInsurance'
 import UserProviders from './UserProviders'
@@ -11,144 +14,109 @@ import UserProviders from './UserProviders'
 import { providersSelector, medicationsSelector, insurancesSelector } from '../../redux/selectors';
 
 class UserProfile extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      isAddMed: false,
-      isAddIns: false,
-      isAddProv: false,
-      isEditMed: false,
-      isEditIns: false,
-      isEditProv: false,
-      user: this.props.user,
-      medication: this.props.medication,
-      insurance: this.props.insurance,
-      provider: this.props.provider,
+    constructor(props){
+        super(props);
     }
-  }
 
-  toggleCreateMeds = () => {
-    this.setState({
-      isAddMed: !this.state.isAddMed,
-    })
-  }
-  toggleCreateIns = () => {
-    this.setState({
-      isAddIns: !this.state.isAddIns,
-    })
-  }
-  toggleCreateProv = () => {
-    this.setState({
-      isAddProv: !this.state.isAddProv,
-    })
-  }
+    toggleCreateMeds = () => {
+        this.props.addMed(!this.props.addingMed)
+    }
+    toggleCreateIns = () => {
+        this.props.addIns(!this.props.addingIns)
+    }
+    toggleCreateProv = () => {
+        this.props.addProv(!this.props.addingProv)
+    }
 
-  toggleEditMeds = (medication) => {
-    this.setState({
-      isEditMed: !this.state.isEditMed,
-      isEditIns: this.state.isEditIns,
-      isEditProv: this.state.isEditProv,
-      medication: medication
-    })
-  }
-  toggleEditIns = (insurance) => {
-    this.setState({
-      isEditMed: this.state.isEditMed,
-      isEditIns: !this.state.isEditIns,
-      isEditProv: this.state.isEditProv,
-      insurance: insurance
-    })
-  }
+    toggleEditMeds = (medication) => {
+        this.props.editMed(medication.id)
+        this.props.addMed(false)
+    }
 
-  toggleEditProv = (provider) => {
-    this.setState({
-      isEditMed: this.state.isEditMed,
-      isEditIns: this.state.isEditIns,
-      isEditProv: !this.state.isEditProv,
-      provider: provider
-    })
-  }
+    toggleEditIns = (insurance) => {
+        this.props.editIns(insurance.id)
+        this.props.addIns(false)
+    }
 
-  handleDeleteMed = (medication) => {
-    this.props.deleteMedication(medication)
-  }
+    toggleEditProv = (provider) => {
+        this.props.editProv(provider.id)
+        this.props.addProv(false)
+    }
 
-  handleDeleteIns = (insurance) => {
-    this.props.deleteInsurance(insurance)
-  }
+    handleDeleteMed = (medication) => {
+        this.props.deleteMedication(medication)
+    }
 
-  handleDeleteProv = (provider) => {
-    this.props.deleteProvider(provider)
-  }
+    handleDeleteIns = (insurance) => {
+        this.props.deleteInsurance(insurance)
+    }
 
-  componentDidMount() {
-    this.props.getMedications()
-    this.props.getInsurances()
-    this.props.getProviders()
-  }
+    handleDeleteProv = (provider) => {
+        this.props.deleteProvider(provider)
+    }
 
-  render() {
-    return(
-      <div className="container">
-        <Grid>
-          <Col md={4}>
-          </Col>
-          <Col md={8}>
-            <h1>{this.props.user.name}</h1>
+    componentDidMount() {
+        this.props.getMedications()
+        this.props.getInsurances()
+        this.props.getProviders()
+    }
 
-            <UserMeds
-              user={this.props.user}
-              medications={this.props.medications}
-              addMed={this.toggleCreateMeds}
-              editMed={this.toggleEditMeds}
+    render() {
+        return(
+            <div className="container">
+                <Grid>
+                    <Col md={4}>
+                    </Col>
+                    <Col md={8}>
+                        <h1>{this.props.user.name}</h1>
 
-              isAddMed={this.state.isAddMed}
-              isEditMed={this.state.isEditMed}
-              isEditIns={this.state.isEditIns}
-              isEditProv={this.state.isEditProv}
+                        <UserMeds
+                            user={this.props.user}
+                            medications={this.props.medications}
+                            addMed={this.toggleCreateMeds}
+                            editMed={this.toggleEditMeds}
 
-              selectedMed={this.state.medication}
-              deleteMed={this.handleDeleteMed}/>
+                            isAddMed={this.props.addingMed}
+                            selectedMed={this.props.editingMed}
+                            deleteMed={this.handleDeleteMed}/>
 
-            <UserInsurance
-              insurances={this.props.insurances}
-              addIns={this.toggleCreateIns}
-              editIns={this.toggleEditIns}
+                        <UserInsurance
+                            insurances={this.props.insurances}
+                            addIns={this.toggleCreateIns}
+                            editIns={this.toggleEditIns}
 
-              isAddIns={this.state.isAddIns}
-              isEditMed={this.state.isEditMed}
-              isEditIns={this.state.isEditIns}
-              isEditProv={this.state.isEditProv}
+                            isAddIns={this.props.addingIns}
+                            selectedIns={this.props.editingIns}
+                            deleteIns={this.handleDeleteIns}/>
 
-              selectedIns={this.state.insurance}
-              deleteIns={this.handleDeleteIns}/>
+                        <UserProviders
+                            providers={this.props.providers}
+                            addProv={this.toggleCreateProv}
+                            editProv={this.toggleEditProv}
 
-            <UserProviders
-              providers={this.props.providers}
-              addProv={this.toggleCreateProv}
-              editProv={this.toggleEditProv}
-
-              isAddProv={this.state.isAddProv}
-              isEditMed={this.state.isEditMed}
-              isEditIns={this.state.isEditIns}
-              isEditProv={this.state.isEditProv}
-
-              selectedProv={this.state.provider}
-              deleteProv={this.handleDeleteProv}/>
-          </Col>
-        </Grid>
-      </div>
-    );
-  }
+                            isAddProv={this.props.addingProv}
+                            selectedProv={this.props.editingProv}
+                            deleteProv={this.handleDeleteProv}/>
+                    </Col>
+                </Grid>
+            </div>
+        );
+    }
 }
 
 
 const mapStatesToProps = (state) => {
-  return ({
-    medications: medicationsSelector(state),
-    insurances: insurancesSelector(state),
-    providers: providersSelector(state),
-  });
+    return ({
+        medications: medicationsSelector(state),
+        insurances: insurancesSelector(state),
+        providers: providersSelector(state),
+        addingMed: addingMed(state),
+        editingMed: editingMed(state),
+        addingIns: addingIns(state),
+        editingIns: editingIns(state),
+        addingProv: addingProv(state),
+        editingProv: editingProv(state),
+    });
 };
 
-export default connect(mapStatesToProps, { getMedications, getInsurances, getProviders, deleteMedication, deleteInsurance, deleteProvider })(UserProfile);
+export default connect(mapStatesToProps, { addMed, editMed, addIns, editIns, addProv, editProv, getMedications, getInsurances, getProviders, deleteMedication, deleteInsurance, deleteProvider })(UserProfile);

@@ -31,24 +31,25 @@ class UserProviders extends Component {
             </Table>
           </div>
 
-          {!this.props.isEditMed && !this.props.isEditIns && this.props.isEditProv ?
+          {this.props.selectedProv ?
             <div className="ProvForm">
               <h3>Edit {this.props.selectedProv.name}</h3>
-              <ProviderForm provider={this.props.selectedProv}/>
+              <ProviderForm provider={this.props.selectedProv} action={"Edit"}/>
               <Button bsStyle="link" onClick={this.props.editProv}>Cancel</Button>
             </div>
             :
-            <div className="AttrNew">
-              <Button bsStyle="primary" onClick={this.props.addProv}>Add New Provider</Button>
-            </div>
+              this.props.isAddProv &&
+              <div className="AttrForm">
+                <h3>Add New Provider</h3>
+                <ProviderForm />
+                <Button bsStyle="link" onClick={this.props.addProv}>Cancel</Button>
+              </div>
           }
 
-          {this.props.isAddProv &&
-            <div className="AttrForm">
-              <h3>Add New Provider</h3>
-              <ProviderForm />
-              <Button bsStyle="link" onClick={this.props.addProv}>Cancel</Button>
-            </div>
+          {!this.props.selectedProv && !this.props.isAddProv &&
+              <div className="AttrNew">
+                <Button bsStyle="primary" onClick={this.props.addProv}>Add New Provider</Button>
+              </div>
           }
 
           <br />

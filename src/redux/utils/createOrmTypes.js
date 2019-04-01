@@ -18,19 +18,13 @@ export default (names) => {
     names = names.constructor === Array ? names : [names];
     return names.reduce((obj, name) => ({
         ...obj,
-        ...apiTypes(name.toUpperCase(), ['ADD', 'UPDATE', 'DELETE']),
-        ...apiTypes(`${name}s`.toUpperCase(), ['REQUEST']),
+        ...types(name.toUpperCase(), ['ADD', 'UPDATE', 'DELETE'], apiType),
+        ...types(`${name}s`.toUpperCase(), ['REQUEST'], apiType),
     }), { ...initial_types })
 };
 
-const apiTypes = (namespace, prefixes = []) => {
-    return prefixes.reduce((obj, prefix) => ({
-        ...obj, ...apiType(prefix, namespace)
-    }), {});
-};
-
 const apiType = (prefix, name) => {
-    const namespace = type(prefix, name);
+    const namespace = typeString(prefix, name);
     const success = `${namespace}_SUCCESS`;
     const failure = `${namespace}_FAILURE`;
     return {
@@ -40,4 +34,22 @@ const apiType = (prefix, name) => {
     }
 };
 
-export const type = (prefix, namespace) => `${prefix}_${namespace}`;
+export const createTypes = (names, prefixes) => {
+    names = names.constructor === Array ? names : [names];
+    return names.reduce((obj, name) => ({
+        ...obj, ...types(name.toUpperCase(), prefixes)
+    }), {});
+};
+
+const types = (namespace, prefixes = [], typeFn = type) => {
+    return prefixes.reduce((obj, prefix) => ({
+        ...obj, ...typeFn(prefix, namespace)
+    }), {});
+};
+
+const type = (prefix, name) => {
+    const namespace = typeString(prefix, name);
+    return { [namespace]: namespace };
+};
+
+const typeString = (prefix, namespace) => `${prefix}_${namespace}`;

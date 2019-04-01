@@ -1,4 +1,4 @@
-// generate common reducer logics intended to work with utils/composeTypes
+// generate common reducer logics intended to work with utils/createOrmTypes
 // expect a type structure of
 // > {
 // >    REQUEST_NAME:           REQUEST_NAME
